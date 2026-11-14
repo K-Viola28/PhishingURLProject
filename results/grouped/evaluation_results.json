@@ -1,0 +1,74 @@
+{
+    "evaluation_date": "2026-11-14T07:56:00.431796+00:00",
+    "experiment": "hostname_grouped",
+    "split_method": "StratifiedGroupKFold",
+    "grouping_column": "hostname",
+    "feature_order": [
+        "uses_https",
+        "hostname_is_ip",
+        "url_length",
+        "subdomain_count",
+        "suspicious_keyword_count",
+        "special_char_count",
+        "encoded_char_count",
+        "has_at_symbol",
+        "brand_misuse"
+    ],
+    "validation_results": {
+        "logistic_regression": {
+            "threshold": 0.5503241441780924,
+            "accuracy": 0.8066129522651262,
+            "precision": 0.4637026326887162,
+            "recall": 0.6683744355679055,
+            "f1_score": 0.5475369020096034,
+            "false_positive_rate": 0.1640498304584992,
+            "confusion_matrix": {
+                "true_negative": 45362,
+                "false_positive": 8902,
+                "false_negative": 3819,
+                "true_positive": 7697
+            }
+        },
+        "random_forest": {
+            "threshold": 0.6910101116568164,
+            "accuracy": 0.8201581027667985,
+            "precision": 0.49028224808120824,
+            "recall": 0.68782563390066,
+            "f1_score": 0.5724920497253542,
+            "false_positive_rate": 0.15175807164971253,
+            "confusion_matrix": {
+                "true_negative": 46029,
+                "false_positive": 8235,
+                "false_negative": 3595,
+                "true_positive": 7921
+            }
+        }
+    },
+    "selected_model": "random_forest",
+    "decision_threshold": 0.6910101116568164,
+    "risk_thresholds": {
+        "low_threshold": 0.820342605659742,
+        "high_threshold": 0.9304212731712728
+    },
+    "test_results": {
+        "accuracy": 0.7514502888415932,
+        "precision": 0.38034137261890616,
+        "recall": 0.6672224538001945,
+        "f1_score": 0.48449993694034554,
+        "false_positive_rate": 0.23067623947752502,
+        "confusion_matrix": {
+            "true_negative": 52184,
+            "false_positive": 15647,
+            "false_negative": 4790,
+            "true_positive": 9604
+        },
+        "test_records": 82225,
+        "prediction_time_seconds": 0.6857833839994782,
+        "average_prediction_time_seconds": 8.340326956515395e-06,
+        "risk_category_counts": {
+            "Low": 56974,
+            "Medium": 22524,
+            "High": 2727
+        }
+    }
+}

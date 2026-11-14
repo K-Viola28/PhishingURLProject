@@ -31,3 +31,31 @@ temp/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Experimental model files
+/models/*.joblib
+/models/*.pkl
+/models/grouped_experiment/
+/models/grouped_no_https/
+
+# Experimental results
+/results/*.csv
+/results/grouped_experiment/
+/results/grouped_no_https/
+
+# Exclude unused model and result files
+/models/grouped/logistic_regression.joblib
+/models/training_metadata.json
+/results/evaluation_results.json
+/results/grouped/validation_data.csv
+# Exclude experimental and superseded ML scripts
+ml/analyze_false_positives.py
+ml/analyze_grouped_errors.py
+ml/evaluate.py
+ml/evaluate_experiment.py
+ml/evaluate_no_https.py
+ml/features_experiment.py
+ml/prepare_grouped_experiment.py
+ml/train_models.py
+ml/train_models_experiment.py
+ml/train_models_no_https.py

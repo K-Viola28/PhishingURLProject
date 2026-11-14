@@ -1,0 +1,29 @@
+{
+    "training_date": "2026-11-13T12:25:12.662728+00:00",
+    "experiment": "hostname_grouped",
+    "dataset": "malicious_phish.csv",
+    "training_records": 263121,
+    "validation_records": 65780,
+    "feature_order": [
+        "uses_https",
+        "hostname_is_ip",
+        "url_length",
+        "subdomain_count",
+        "suspicious_keyword_count",
+        "special_char_count",
+        "encoded_char_count",
+        "has_at_symbol",
+        "brand_misuse"
+    ],
+    "class_weights": {
+        "benign": 0.6061047917847221,
+        "phishing": 2.8561612609092095
+    },
+    "random_state": 42,
+    "split_method": "StratifiedGroupKFold",
+    "grouping_column": "hostname",
+    "models": [
+        "logistic_regression",
+        "random_forest"
+    ]
+}

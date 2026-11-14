@@ -49,7 +49,38 @@ MULTI_PART_SUFFIXES = {
 
 # Brand configuration will be populated with verified
 # brand names, aliases and legitimate domains.
-BRAND_NAMES = {}
+BRAND_NAMES = {
+    "safaricom": {
+        "aliases": ["m-pesa", "mpesa"],
+        "legitimate_domains": [
+            "safaricom.co.ke",
+        ],
+    },
+    "kcb": {
+        "aliases": [
+            "kcb bank",
+            "kenya commercial bank",
+        ],
+        "legitimate_domains": [
+            "kcbgroup.com",
+        ],
+    },
+    "equity": {
+        "aliases": [
+            "equity bank",
+            "equity group",
+        ],
+        "legitimate_domains": [
+            "equitygroupholdings.com",
+        ],
+    },
+    "co-operative": {
+    "aliases": [],
+    "legitimate_domains": [
+        "co-opbank.co.ke",
+    ],
+},
+}
 
 
 def is_ip_address(hostname):
@@ -114,19 +145,24 @@ def count_encoded_characters(url):
     return len(re.findall(r"%[0-9a-fA-F]{2}", url))
 
 
+
 def check_brand_misuse(url_parts):
     """
-    Check for configured brand names or aliases outside
-    their legitimate domains.
+    Check whether a configured brand name appears as a
+    distinct hostname component outside its legitimate domains.
 
-    Returns 0 until verified brand configurations are added.
+    The URL path is deliberately excluded to reduce false positives.
     """
-    hostname = (url_parts.hostname or "").lower()
-    path = (url_parts.path or "").lower()
 
-    searchable_text = hostname + " " + path
+    hostname = (url_parts.hostname or "").lower().strip(".")
+
+    if not hostname:
+        return 0
+
+    hostname_labels = hostname.split(".")
 
     for brand, details in BRAND_NAMES.items():
+
         names = [brand.lower()]
         names.extend(
             alias.lower()
@@ -146,10 +182,14 @@ def check_brand_misuse(url_parts):
         if legitimate:
             continue
 
-        if any(name in searchable_text for name in names):
-            return 1
+        for name in names:
+
+            # Require a complete hostname label match.
+            if name in hostname_labels:
+                return 1
 
     return 0
+
 
 
 def extract_features(url):
