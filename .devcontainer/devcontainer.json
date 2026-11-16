@@ -1,4 +1,4 @@
 {
-    "postAttachCommand": "bash .devcontainer/start-django.sh",
+    "postStartCommand": "bash .devcontainer/start-django.sh",
     "forwardPorts": [8000]
 }
